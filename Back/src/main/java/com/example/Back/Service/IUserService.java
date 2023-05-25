@@ -1,4 +1,4 @@
-package com.example.Back.api;
+package com.example.Back.Service;
 
 import com.example.Back.Entity.User;
 
@@ -10,5 +10,5 @@ public interface IUserService {
     List<User> queryAllUser();
     int insertUser(User user);
     int updateUser(User user);
-    int deleteUser(User user);
+    Optional<Integer> deleteUser(Integer id);
 }

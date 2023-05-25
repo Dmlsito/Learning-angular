@@ -1,20 +1,15 @@
 package com.example.Back.Service;
-
-
 import com.example.Back.Entity.User;
 import com.example.Back.Model.dao.UserDao;
-import com.example.Back.api.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
 @Service("UserService")
 @Lazy
-public class UserService implements IUserService {
-
+public class UserServiceImp implements IUserService {
     @Autowired
     private UserDao userDao;
 
@@ -42,16 +37,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public int deleteUser(User user) {
-       userDao.deleteById(user.getIdUser());
-       return user.getIdUser();
-
+    public Optional<Integer> deleteUser(Integer userId) {
+       userDao.deleteById(userId);
+       Optional<Integer> userIdDeleted = userId.describeConstable();
+       return userIdDeleted;
     }
-
-
-
-
-
-
-
 }

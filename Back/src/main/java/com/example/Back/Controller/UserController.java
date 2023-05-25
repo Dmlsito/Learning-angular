@@ -2,7 +2,7 @@ package com.example.Back.Controller;
 
 import com.example.Back.Entity.User;
 import com.example.Back.Model.dao.UserDao;
-import com.example.Back.api.IUserService;
+import com.example.Back.Service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class UserController {
     @PostMapping("/add")
     public ResponseEntity<?> insertUser(@RequestBody User user) {
         int idUser = userService.insertUser(user);
-        Optional<User> newUser = userDao.getReferenceById(idUser);
+        Optional<User> newUser = userDao.findById(idUser);
         return new ResponseEntity<>(newUser, HttpStatus.resolve(200));
     }
 
@@ -36,7 +36,12 @@ public class UserController {
     public ResponseEntity<?> getUser(@PathVariable Integer id) {
         Optional<User> newUser = userService.queryUser(id);
         return new ResponseEntity<>(newUser, HttpStatus.resolve(200));
+    }
 
+    @DeleteMapping("delete/{id}")
+    public ResponseEntity<?> delterUser(@PathVariable Integer id){
+        Optional<Integer> userId = userService.deleteUser(id);
+        return new ResponseEntity<>(userId, HttpStatus.resolve(200));
     }
 
 }
